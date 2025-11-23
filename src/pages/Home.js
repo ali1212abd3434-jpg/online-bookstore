@@ -1,6 +1,6 @@
 import books from "../data/books";
 import BookCard from "../components/BookCard";
-import { Container, Row, Col, Jumbotron } from "react-bootstrap";
+import { Container, Row, Col,  } from "react-bootstrap";
 
 const Home = () => {
   return (
