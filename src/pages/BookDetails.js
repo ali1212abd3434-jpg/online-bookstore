@@ -1,23 +1,19 @@
+import React from "react";
 import { useParams } from "react-router-dom";
 import books from "../data/books";
-import { Container, Button } from "react-bootstrap";
 
-const BookDetails = () => {
+export default function BookDetails({ addToCart }) {
   const { id } = useParams();
-  const book = books.find((b) => b.id === parseInt(id));
+  const book = books.find((b) => b.id.toString() === id);
 
-  if (!book) return <Container className="mt-4"><p>Book not found!</p></Container>;
+  if (!book) return <p>Book not found</p>;
 
   return (
-    <Container className="mt-4">
+    <div>
       <h1>{book.title}</h1>
-      <img src={book.image} alt={book.title} className="img-fluid mb-3" />
-      <p><strong>Author:</strong> {book.author}</p>
+      <p>{book.author}</p>
       <p>{book.description}</p>
-      <p><strong>Price:</strong> ${book.price}</p>
-      <Button variant="success">Add to Cart</Button>
-    </Container>
+      <button onClick={() => addToCart(book)}>Add to Cart</button>
+    </div>
   );
-};
-
-export default BookDetails;
+}

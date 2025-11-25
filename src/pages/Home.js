@@ -1,20 +1,21 @@
+import React from "react";
 import books from "../data/books";
-import BookCard from "../components/BookCard";
-import { Container, Row, Col,  } from "react-bootstrap";
 
-const Home = () => {
+export default function Home({ addToCart }) {
+  console.log("Home received addToCart:", addToCart); // debug
+
   return (
-    <Container className="mt-4">
-      <h1 className="text-center mb-4">Welcome to Our Online Bookstore</h1>
-      <Row>
+    <div>
+      <h1>Book List</h1>
+      <div className="grid">
         {books.map((book) => (
-          <Col key={book.id} xs={12} sm={6} md={4}>
-            <BookCard book={book} />
-          </Col>
+          <div key={book.id} className="book-card">
+            <h2>{book.title}</h2>
+            <p>{book.author}</p>
+            <button onClick={() => addToCart(book)}>Add to Cart</button>
+          </div>
         ))}
-      </Row>
-    </Container>
+      </div>
+    </div>
   );
-};
-
-export default Home;
+}
