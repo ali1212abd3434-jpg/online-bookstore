@@ -9,7 +9,7 @@ const books = [
   },
   {
     id: 2,
-    title: "1984",
+    title: "The Catcher in the Rye",
     author: "George Orwell",
     price: 12,
     image: "https://via.placeholder.com/150",
