@@ -1,23 +1,58 @@
-import { Link } from "react-router-dom";
-import { Navbar as BSNavbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const AppNavbar = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("adminToken");
+
+  const handleLogout = () => {
+    localStorage.removeItem("adminToken");
+    navigate("/admin-login");
+  };
+
   return (
-    <BSNavbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <BSNavbar.Brand as={Link} to="/">BookStore</BSNavbar.Brand>
-        <BSNavbar.Toggle aria-controls="basic-navbar-nav" />
-        <BSNavbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+        <Navbar.Brand as={Link} to="/">
+          Online Bookstore
+        </Navbar.Brand>
+
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/services">Services</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+            <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
           </Nav>
-        </BSNavbar.Collapse>
+
+          <Nav>
+            {!token && (
+              <Nav.Link as={Link} to="/admin-login">
+                Admin Login
+              </Nav.Link>
+            )}
+
+            {token && (
+              <>
+                <Nav.Link as={Link} to="/admin">
+                  Dashboard
+                </Nav.Link>
+                <Button
+                  variant="outline-light"
+                  size="sm"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
       </Container>
-    </BSNavbar>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default AppNavbar;

@@ -8,15 +8,16 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import BookDetails from "./pages/BookDetails";
 import Cart from "./pages/Cart";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   const [cart, setCart] = useState([]);
 
   const addToCart = (book) => {
-  console.log("Adding to cart:", book);   // ✅ debug line
-  setCart([...cart, book]);
-};
-
+    console.log("Adding to cart:", book);
+    setCart((prevCart) => [...prevCart, book]);
+  };
 
   return (
     <Router>
@@ -28,6 +29,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/book/:id" element={<BookDetails addToCart={addToCart} />} />
         <Route path="/cart" element={<Cart cart={cart} />} />
+
+        {/* Phase 2 Admin */}
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
       <Footer />
     </Router>
