@@ -8,7 +8,7 @@ const bookRoutes = require("./books.js");
 
 // Import DB connection
 const db = require("./db.js");
-
+  app.get("/test-db", (req, res) => { db.query("SELECT 1", (err, results) => { if (err) { return res.status(500).send("DB error: " + err.message); } res.send("DB connected: " + JSON.stringify(results)); }); });
 dotenv.config();
 const app = express();
 
