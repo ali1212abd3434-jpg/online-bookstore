@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("./db"); // 👈 fixed path, db.js is at root now
+const db = require("../db"); // ✅ fixed path
 
 // =========================
 // GET all books

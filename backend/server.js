@@ -3,8 +3,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 // Import routes
-const adminRoutes = require("./admin.js");
-const bookRoutes = require("./books.js");
+const adminRoutes = require("./routes/admin.js");
+const bookRoutes = require("./routes/books.js");
 
 // Import DB connection
 const db = require("./db.js");

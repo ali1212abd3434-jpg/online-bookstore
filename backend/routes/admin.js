@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const db = require("./db"); // 👈 now at root, so use ./db
+const db = require("../db"); // ✅ fixed path
 const jwt = require("jsonwebtoken");
-const adminAuth = require("./middleware/adminAuth"); // 👈 adjust path if middleware is at root
+const adminAuth = require("../middleware/adminAuth"); // ✅ fixed path
 
 // =========================
 // ADMIN LOGIN
