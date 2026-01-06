@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db");
+const db = require("./db"); // 👈 now at root, so use ./db
 const jwt = require("jsonwebtoken");
-const adminAuth = require("../middleware/adminAuth");
+const adminAuth = require("./middleware/adminAuth"); // 👈 adjust path if middleware is at root
 
 // =========================
 // ADMIN LOGIN
@@ -10,36 +10,32 @@ const adminAuth = require("../middleware/adminAuth");
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
 
-  db.query(
-    "SELECT * FROM admins WHERE username = ?",
-    [username],
-    (err, results) => {
-      if (err) {
-        console.error("LOGIN SQL ERROR:", err);
-        return res.status(500).json({ error: err.message });
-      }
-
-      if (!results || results.length === 0) {
-        return res.status(401).json({ error: "User not found" });
-      }
-
-      const admin = results[0];
-
-      // plaintext password check (matches your DB)
-      if (password !== admin.password) {
-        return res.status(401).json({ error: "Incorrect password" });
-      }
-
-      // create JWT token
-      const token = jwt.sign(
-        { id: admin.id, username: admin.username },
-        process.env.JWT_SECRET,
-        { expiresIn: "2h" }
-      );
-
-      return res.json({ message: "Login successful", token });
+  db.query("SELECT * FROM admins WHERE username = ?", [username], (err, results) => {
+    if (err) {
+      console.error("LOGIN SQL ERROR:", err);
+      return res.status(500).json({ error: err.message });
     }
-  );
+
+    if (!results || results.length === 0) {
+      return res.status(401).json({ error: "User not found" });
+    }
+
+    const admin = results[0];
+
+    // plaintext password check (matches your DB)
+    if (password !== admin.password) {
+      return res.status(401).json({ error: "Incorrect password" });
+    }
+
+    // create JWT token
+    const token = jwt.sign(
+      { id: admin.id, username: admin.username },
+      process.env.JWT_SECRET,
+      { expiresIn: "2h" }
+    );
+
+    return res.json({ message: "Login successful", token });
+  });
 });
 
 // =========================
