@@ -6,6 +6,9 @@ const dotenv = require("dotenv");
 const adminRoutes = require("./admin.js");
 const bookRoutes = require("./books.js");
 
+// Import DB connection
+const db = require("./db.js");
+
 dotenv.config();
 const app = express();
 
