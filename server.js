@@ -3,8 +3,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 // Import routes (now at root)
-const adminRoutes = require("./admin");
-const bookRoutes = require("./books");
+const adminRoutes = require("./admin.js");
+const bookRoutes = require("./books.js");
 
 dotenv.config();
 const app = express();
