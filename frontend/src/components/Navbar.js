@@ -11,37 +11,67 @@ const AppNavbar = () => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar
+      bg="light"
+      variant="light"
+      expand="lg"
+      sticky="top"
+      className="shadow-sm border-bottom"
+    >
       <Container>
-        <Navbar.Brand as={Link} to="/">
-          Online Bookstore
+        <Navbar.Brand
+          as={Link}
+          to="/"
+          className="fw-bold text-primary"
+          style={{ fontSize: "1.5rem" }}
+        >
+          📚 Online Bookstore
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/about">About</Nav.Link>
-            <Nav.Link as={Link} to="/services">Services</Nav.Link>
-            <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-            <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
+            <Nav.Link as={Link} to="/" className="fw-semibold px-3">
+              Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="/about" className="fw-semibold px-3">
+              About
+            </Nav.Link>
+            <Nav.Link as={Link} to="/services" className="fw-semibold px-3">
+              Services
+            </Nav.Link>
+            <Nav.Link as={Link} to="/contact" className="fw-semibold px-3">
+              Contact
+            </Nav.Link>
+            <Nav.Link as={Link} to="/cart" className="fw-semibold px-3">
+              Cart
+            </Nav.Link>
           </Nav>
 
           <Nav>
             {!token && (
-              <Nav.Link as={Link} to="/admin-login">
+              <Nav.Link
+                as={Link}
+                to="/admin-login"
+                className="fw-semibold text-success px-3"
+              >
                 Admin Login
               </Nav.Link>
             )}
 
             {token && (
               <>
-                <Nav.Link as={Link} to="/admin">
+                <Nav.Link
+                  as={Link}
+                  to="/admin"
+                  className="fw-semibold text-info px-3"
+                >
                   Dashboard
                 </Nav.Link>
                 <Button
-                  variant="outline-light"
+                  variant="outline-danger"
                   size="sm"
+                  className="ms-2 fw-bold"
                   onClick={handleLogout}
                 >
                   Logout
